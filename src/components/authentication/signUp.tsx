@@ -2,14 +2,17 @@
 
 import { useState, Activity } from "react";
 import Link from "next/link";
+import { useStore } from "@/store/store";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
+import Logo from "./logo";
 // types
 import { ViewPasswordProps } from "@/types/auth.type";
 
+// view password component
 const ViewPassword = ({ showPassword, setShowPassword }: ViewPasswordProps) => {
   // toggle password
   const handleClick = () => {
@@ -30,13 +33,14 @@ const ViewPassword = ({ showPassword, setShowPassword }: ViewPasswordProps) => {
   );
 };
 
+// sign up button component
 const SignUpButton = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   return (
     <Button
-      type="submit"
-      className="mt-8 h-10 w-full cursor-pointer rounded-sm bg-slate-800 text-white"
+      type="button"
+      className="mt-8 h-10 w-full cursor-pointer rounded-sm bg-slate-800 text-white transition-colors duration-300 hover:bg-slate-950"
     >
       <Activity mode={loading ? "visible" : "hidden"}>
         <Spinner />
@@ -47,6 +51,10 @@ const SignUpButton = () => {
 };
 
 const TermsAndConditions = () => {
+  // state and setters from store
+  const signUpForm = useStore((state) => state.signUpForm);
+  const setSignUpForm = useStore((state) => state.setSignUpForm);
+
   return (
     <div className="w-full">
       <div className="flex items-center gap-2">
@@ -54,17 +62,23 @@ const TermsAndConditions = () => {
           type="checkbox"
           id="termsAndConditions"
           name="termsAndConditions"
+          checked={signUpForm.agreeToTermsAndConditions}
+          onChange={(e) =>
+            setSignUpForm("agreeToTermsAndConditions", e.target.checked)
+          }
           className="size-3.75 cursor-pointer rounded-sm accent-green-600"
         />
-        <span className="cursor-pointer text-sm hover:underline">
-          I agree to the <span className="text-green-600">Terms</span> and
-          <span className="hover text-green-600"> Conditions</span>
+        <span className="cursor-pointer text-xs font-medium hover:underline">
+          I agree to the <span className="font-bold text-green-800">Terms</span>{" "}
+          and
+          <span className="font-bold text-green-800"> Conditions</span>
         </span>
       </div>
     </div>
   );
 };
 
+// redirect to sign in page
 const SignInRedirect = () => {
   return (
     <Link href="/auth/sign-in" className="mt-10 text-sm">
@@ -73,24 +87,23 @@ const SignInRedirect = () => {
   );
 };
 
-const Logo = () => {
-  return (
-    <div className="mb-10 flex items-center gap-2">
-      <h1 className="text-2xl font-semibold">
-        Approv<span className="text-green-600">Ease</span>
-      </h1>
-    </div>
-  );
-};
-
+// sign up form component
 const SignUp = () => {
+  // local state
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
 
+  // state and setters from store
+  const signUpForm = useStore((state) => state.signUpForm);
+  const setSignUpForm = useStore((state) => state.setSignUpForm);
+
   return (
-    <form className="flex h-full flex-col items-center justify-center px-20">
-      <Logo />
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      className="flex h-full flex-col items-center justify-center px-20"
+    >
+      <Logo headerText="Create an account" />
       <div className="flex w-full flex-col gap-4">
         <div className="flex flex-col gap-2">
           <Label htmlFor="email">Email</Label>
@@ -99,6 +112,8 @@ const SignUp = () => {
             id="email"
             name="email"
             placeholder="Enter your email"
+            value={signUpForm.email}
+            onChange={(e) => setSignUpForm("email", e.target.value)}
             className="h-10 rounded-sm border-gray-300 bg-gray-100 text-center text-xs placeholder:text-gray-500 focus:bg-white"
           />
         </div>
@@ -111,6 +126,8 @@ const SignUp = () => {
               id="password"
               name="password"
               placeholder="Enter your password"
+              value={signUpForm.password}
+              onChange={(e) => setSignUpForm("password", e.target.value)}
               className="h-10 rounded-sm border-gray-300 bg-gray-100 text-center text-xs placeholder:text-gray-500 focus:bg-white"
             />
             <ViewPassword
@@ -128,6 +145,8 @@ const SignUp = () => {
               id="confirm-password"
               name="confirm-password"
               placeholder="Confirm your password"
+              value={signUpForm.confirmPassword}
+              onChange={(e) => setSignUpForm("confirmPassword", e.target.value)}
               className="h-10 rounded-sm border-gray-300 bg-gray-100 text-center text-xs placeholder:text-gray-500 focus:bg-white"
             />
             <ViewPassword

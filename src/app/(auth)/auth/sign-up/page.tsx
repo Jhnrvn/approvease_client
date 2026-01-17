@@ -1,5 +1,4 @@
 // components
-
 import SignUp from "@/components/authentication/signUp";
 
 const page = () => {
