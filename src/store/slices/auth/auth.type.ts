@@ -22,3 +22,12 @@ export interface SignUpFormType {
   setSignUpForm: (field: keyof SignUpFormData, value: string | boolean) => void;
   resetSignUpForm: () => void;
 }
+
+export interface AuthModalType {
+  authModal: {
+    isOpen: boolean;
+    message: string;
+  };
+  openAuthModal: (message: string) => void;
+  closeAuthModal: () => void;
+}

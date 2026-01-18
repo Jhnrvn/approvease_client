@@ -1,5 +1,5 @@
 // components
-import SignUp from "@/components/authentication/signUp";
+import SignUp from "@/components/authentication/SignUpForm";
 
 const page = () => {
   return (
