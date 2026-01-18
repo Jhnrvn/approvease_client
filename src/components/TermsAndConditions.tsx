@@ -11,24 +11,25 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+
 // types
 import type { TermsAndConditionsInfoType } from "@/types/auth";
 
-const TermsAnConditionsInfo = (term: TermsAndConditionsInfoType) => {
+const TermsAndConditionsInfo = (term: TermsAndConditionsInfoType) => {
   return (
     <div className="mb-4">
-      <span className="mb-2 text-sm font-semibold">{term.title}</span>
-      <span className="text-justify text-xs">{term.content}</span>
+      <span className="mb-2 block text-sm font-semibold">{term.title}</span>
+      <span className="block text-justify text-xs">{term.content}</span>
     </div>
   );
 };
 
 const TermsAndConditions = () => {
   // terms and conditions data
-  const termsData = JSON.parse(JSON.stringify(termsAndConditionData));
+  const termsData = termsAndConditionData;
 
   // local state
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   // state from store
   const setSignUpForm = useStore((state) => state.setSignUpForm);
@@ -37,7 +38,7 @@ const TermsAndConditions = () => {
     (state) => state.closeTermsAndConditions,
   );
 
-  // handle confirm and close terms and conditions
+  // handle confirm and close
   const handleConfirmAndClose = () => {
     setSignUpForm("agreeToTermsAndConditions", true);
     closeTermsAndConditions();
@@ -49,37 +50,44 @@ const TermsAndConditions = () => {
       <DialogContent className="bg-white">
         <DialogHeader>
           <DialogTitle>Terms and Conditions</DialogTitle>
-          <p className="text-xs">Last updated: {termsData.lastUpdated}</p>
 
-          <DialogDescription className="h-50">
-            <div className="h-full w-full overflow-y-auto border border-slate-300 p-2">
-              {/* render terms and conditions */}
-              {termsData.termsAndConditions.map(
-                (term: TermsAndConditionsInfoType) => (
-                  <TermsAnConditionsInfo key={term.id} {...term} />
-                ),
-              )}
-            </div>
+          <DialogDescription>
+            Last updated: {termsData.lastUpdated}
           </DialogDescription>
-          <div className="mt-4 flex gap-2">
+
+          <div className="h-52 w-full overflow-y-auto rounded-md border border-slate-300 p-2">
+            {termsData.termsAndConditions.map(
+              (term: TermsAndConditionsInfoType) => (
+                <TermsAndConditionsInfo key={term.id} {...term} />
+              ),
+            )}
+          </div>
+
+          {/* Checkbox */}
+          <div className="mt-4 flex items-start gap-2">
             <input
               type="checkbox"
               id="confirmAgreement"
               name="confirmAgreement"
-              onChange={() => setIsChecked(!isChecked)}
-              className="size-5 cursor-pointer rounded-sm accent-green-600"
+              checked={isChecked}
+              onChange={() => setIsChecked((prev) => !prev)}
+              className="mt-0.5 size-5 cursor-pointer accent-green-600"
             />
-            <p className="cursor-pointer text-xs font-medium">
+            <label
+              htmlFor="confirmAgreement"
+              className="cursor-pointer text-xs font-medium"
+            >
               By checking this box, I confirm that I have read and agree to the
               Terms and Conditions of ApprovEase.
-            </p>
+            </label>
           </div>
+
+          {/* Confirm button */}
           <div className="mt-4 flex justify-end">
             <Button
-              variant="default"
               disabled={!isChecked}
               onClick={handleConfirmAndClose}
-              className="cursor-pointer bg-slate-800 text-white hover:bg-slate-950"
+              className="bg-slate-800 text-white hover:bg-slate-950"
             >
               Confirm
             </Button>
