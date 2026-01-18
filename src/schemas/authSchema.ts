@@ -16,7 +16,10 @@ export const signUpSchema = z
     confirmPassword: z
       .string()
       .min(6, "Confirm Password must be at least 6 characters long"),
-    agreeToTermsAndConditions: z.boolean(),
+    agreeToTermsAndConditions: z.boolean().refine((value) => value === true, {
+      message: "You must agree to the terms and conditions",
+      path: ["agreeToTermsAndConditions"],
+    }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",

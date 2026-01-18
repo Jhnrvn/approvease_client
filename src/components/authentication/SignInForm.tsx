@@ -48,6 +48,7 @@ const SignInForm = () => {
   const openAuthModal = useStore((state) => state.openAuthModal);
   const closeAuthModal = useStore((state) => state.closeAuthModal);
 
+  // sign in handler
   const signInHandler = async () => {
     try {
       setLoading(true);

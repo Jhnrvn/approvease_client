@@ -17,8 +17,8 @@ import type { TermsAndConditionsInfoType } from "@/types/auth";
 const TermsAnConditionsInfo = (term: TermsAndConditionsInfoType) => {
   return (
     <div className="mb-4">
-      <h3 className="mb-2 text-sm font-semibold">{term.title}</h3>
-      <p className="text-justify text-xs">{term.content}</p>
+      <span className="mb-2 text-sm font-semibold">{term.title}</span>
+      <span className="text-justify text-xs">{term.content}</span>
     </div>
   );
 };

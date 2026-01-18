@@ -7,12 +7,10 @@ export type SignInFormType = {
 
 // sign up form types
 export type SignUpFormType = {
-  signUpForm: {
-    email: string;
-    password: string;
-    confirmPassword: string;
-    agreeToTermsAndConditions: boolean;
-  };
+  email: string;
+  password: string;
+  confirmPassword: string;
+  agreeToTermsAndConditions: boolean;
 };
 
 // sign up form types

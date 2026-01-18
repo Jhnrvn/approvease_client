@@ -6,20 +6,23 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import Logo from "./logo";
 import {
   TermsAndConditions,
   ViewPassword,
   SignInRedirect,
 } from "./SignUpComponents";
+import Logo from "./logo";
+// types
+import type { SignUpFormType } from "@/types/auth";
+// utils
+import { validateSignUpData } from "@/utils/auth.validation";
 
 // sign up button component
-const SignUpButton = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-
+const SignUpButton = ({ loading }: { loading: boolean }) => {
   return (
     <Button
-      type="button"
+      type="submit"
+      disabled={loading}
       className="mt-8 h-10 w-full cursor-pointer rounded-sm bg-slate-800 text-white transition-colors duration-300 hover:bg-slate-950"
     >
       <Activity mode={loading ? "visible" : "hidden"}>
@@ -36,14 +39,50 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // state and setters from store
-  const signUpForm = useStore((state) => state.signUpForm);
+  const signUpForm: SignUpFormType = useStore((state) => state.signUpForm);
   const setSignUpForm = useStore((state) => state.setSignUpForm);
+  const openAuthModal = useStore((state) => state.openAuthModal);
+  const closeAuthModal = useStore((state) => state.closeAuthModal);
+
+  // form submit handler
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // sign in handler
+    const signUpHandler = async () => {
+      try {
+        setLoading(true);
+      } catch (error) {
+      } finally {
+        setTimeout(() => {
+          setLoading(false);
+        }, 3000);
+      }
+    };
+
+    try {
+      // checks for validation errors
+      validateSignUpData(signUpForm);
+      // proceed to sign up
+      signUpHandler();
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        // display validation errors
+        console.error(error);
+        openAuthModal(error.message);
+      }
+    } finally {
+      // close auth modal
+      setTimeout(closeAuthModal, 2000);
+    }
+  };
 
   return (
     <form
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={(e: React.FormEvent) => handleSubmit(e)}
       className="flex h-full flex-col items-center justify-center px-20"
     >
       <Logo headerText="Create an account" />
@@ -102,7 +141,7 @@ const SignUp = () => {
       <div className="mt-2 flex w-full justify-between">
         <TermsAndConditions />
       </div>
-      <SignUpButton />
+      <SignUpButton loading={loading} />
       <SignInRedirect />
     </form>
   );
