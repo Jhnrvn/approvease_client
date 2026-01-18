@@ -20,3 +20,10 @@ export type ViewPasswordProps = {
   showPassword: boolean;
   setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+// terms and conditions types
+export interface TermsAndConditionsInfoType {
+  id: number;
+  title: string;
+  content: string;
+}

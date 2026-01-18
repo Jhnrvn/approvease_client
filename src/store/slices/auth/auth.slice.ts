@@ -4,10 +4,14 @@ import type {
   SignInFormType,
   SignUpFormType,
   AuthModalType,
+  TermsAndConditionsType,
 } from "./auth.type";
 
 // combined auth slice type
-export type AuthSliceType = SignInFormType & SignUpFormType & AuthModalType;
+export type AuthSliceType = SignInFormType &
+  SignUpFormType &
+  AuthModalType &
+  TermsAndConditionsType;
 
 // authentication slice
 export const AuthSlice: StateCreator<AuthSliceType, [], []> = (set) => {
@@ -62,7 +66,7 @@ export const AuthSlice: StateCreator<AuthSliceType, [], []> = (set) => {
   };
 
   // authentication modal state
-  const authModal = {
+  const authModal: AuthModalType = {
     authModal: {
       isOpen: false,
       message: "",
@@ -85,9 +89,25 @@ export const AuthSlice: StateCreator<AuthSliceType, [], []> = (set) => {
     },
   };
 
+  // terms and conditions
+  const terms: TermsAndConditionsType = {
+    termsAndConditions: false,
+    setTermsAndConditions: (value: boolean) => {
+      set(() => ({
+        termsAndConditions: value,
+      }));
+    },
+    closeTermsAndConditions: () => {
+      set(() => ({
+        termsAndConditions: false,
+      }));
+    },
+  };
+
   return {
     ...signInFormData,
     ...signUpFormData,
     ...authModal,
+    ...terms,
   };
 };

@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
+// auth modal component
 export const AuthModal = () => {
   // state from store
   const AuthModal = useStore((state) => state.authModal);

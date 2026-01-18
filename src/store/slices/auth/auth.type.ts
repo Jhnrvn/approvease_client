@@ -31,3 +31,10 @@ export interface AuthModalType {
   openAuthModal: (message: string) => void;
   closeAuthModal: () => void;
 }
+
+export interface TermsAndConditionsType {
+  termsAndConditions: boolean;
+  setTermsAndConditions: (value: boolean) => void;
+  closeTermsAndConditions: () => void;
+}
+

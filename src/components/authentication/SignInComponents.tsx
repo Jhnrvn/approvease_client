@@ -34,13 +34,14 @@ export const ViewPassword = ({
 export const ForgotPassword = () => {
   return (
     <Link href="/auth/forgot-password">
-      <p className="text-sm text-nowrap text-green-600 hover:underline">
+      <p className="text-xs text-nowrap text-green-600 hover:underline">
         Forgot password?
       </p>
     </Link>
   );
 };
 
+// component for remember me checkbox
 export const RememberMe = () => {
   // state and setters from store
   const setSignInForm = useStore((state) => state.setSignInForm);
@@ -57,7 +58,7 @@ export const RememberMe = () => {
           onChange={(e) => setSignInForm("rememberMe", e.target.checked)}
           className="size-3.75 cursor-pointer rounded-sm accent-green-600"
         />
-        <span className="text-sm">Remember me</span>
+        <span className="text-xs">Remember me</span>
       </div>
     </div>
   );
@@ -66,7 +67,7 @@ export const RememberMe = () => {
 // component for sign-up redirect link
 export const SignUpRedirect = () => {
   return (
-    <Link href="/auth/sign-up" className="mt-10 text-sm">
+    <Link href="/auth/sign-up" className="mt-10 text-xs">
       Not yet registered? <span className="text-green-600">Sign up</span>
     </Link>
   );

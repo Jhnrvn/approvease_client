@@ -75,6 +75,7 @@ const SignInForm = () => {
         openAuthModal(error.message);
       }
     } finally {
+      // close auth modal
       setTimeout(closeAuthModal, 2000);
     }
   };

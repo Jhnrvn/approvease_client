@@ -1,0 +1,62 @@
+{
+  "appName": "ApprovEase",
+  "lastUpdated": "2026-01-18",
+  "termsAndConditions": [
+    {
+      "id": 0,
+      "title": "Introduction",
+      "content": "Welcome to ApprovEase. By accessing or using this application, you agree to comply with and be bound by these Terms and Conditions. If you do not agree, please do not use the application."
+    },
+    {
+      "id": 1,
+      "title": "Use of the Application",
+      "content": "You agree to use ApprovEase only for lawful purposes and in a way that does not violate applicable laws, infringe the rights of others, or disrupt system functionality or security."
+    },
+    {
+      "id": 2,
+      "title": "User Accounts",
+      "content": "Users are responsible for maintaining the confidentiality of their account credentials. Any activity performed under your account is your responsibility. Accounts may be suspended or terminated for violations of these terms."
+    },
+    {
+      "id": 3,
+      "title": "Data and Privacy",
+      "content": "ApprovEase may collect and store user information such as names, email addresses, and approval records. This data is used solely for system functionality and improvement and is not shared with third parties without consent unless required by law."
+    },
+    {
+      "id": 4,
+      "title": "Approval Records and Accuracy",
+      "content": "While ApprovEase aims to provide accurate approval tracking, the system does not guarantee error-free or uninterrupted operation. Users are responsible for verifying approval outcomes before making decisions."
+    },
+    {
+      "id": 5,
+      "title": "Intellectual Property",
+      "content": "All content, source code, design, and branding related to ApprovEase are the property of the developers unless otherwise stated. Unauthorized copying, modification, or distribution is prohibited."
+    },
+    {
+      "id": 6,
+      "title": "Limitation of Liability",
+      "content": "ApprovEase and its developers are not liable for data loss, system downtime, unauthorized access, or decisions made based on information provided by the system."
+    },
+    {
+      "id": 7,
+      "title": "Termination",
+      "content": "Access to ApprovEase may be suspended or terminated at any time without prior notice if these Terms and Conditions are violated."
+    },
+    {
+      "id": 8,
+      "title": "Modifications to Terms",
+      "content": "These Terms and Conditions may be updated at any time. Continued use of ApprovEase constitutes acceptance of the updated terms."
+    },
+    {
+      "id": 9,
+      "title": "Governing Law",
+      "content": "These Terms and Conditions shall be governed by and interpreted in accordance with the laws of the Philippines."
+    },
+    {
+      "id": 10,
+      "title": "Contact Information",
+      "content": "For questions or concerns regarding these Terms and Conditions, please contact ApprovEase Support."
+    }
+  ],
+  "educationalDisclaimer": "ApprovEase is developed for educational and demonstration purposes."
+}
